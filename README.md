@@ -19,6 +19,23 @@ The goal is to connect these environments through a controlled engineering lifec
 
 ---
 
+## Project documentation
+
+The engineering foundation is documented in the following files:
+
+| Document | Purpose |
+|---|---|
+| [Concept](docs/CONCEPT.md) | Problem statement, dual-knowledge model, hypothesis, and scope |
+| [Architecture](docs/ARCHITECTURE.md) | Logical components, trust boundaries, and extension points |
+| [Knowledge model](docs/KNOWLEDGE_MODEL.md) | Knowledge classes, source metadata, provenance, and freshness |
+| [Specification standard](docs/SPECIFICATION_STANDARD.md) | Requirements, architecture, component, interface, and test specifications |
+| [Workflow](docs/WORKFLOW.md) | End-to-end engineering lifecycle and automation progression |
+| [Roadmap](docs/ROADMAP.md) | Milestones, demonstration criteria, risks, and open questions |
+| [Root AGENTS.md](AGENTS.md) | Vendor-neutral engineering instructions |
+| [CLAUDE.md](CLAUDE.md) | Claude Code entry guidance |
+
+Directory-level `AGENTS.md` files add scoped instructions for documentation, knowledge curation, open-source analysis, skills, specifications, implementation, agents, implementation knowledge, and tests.
+
 ## Why SpecBook-Agent?
 
 AI coding tools have made it much easier to generate code. Building and maintaining a large system, however, involves more than producing functions and files.
@@ -174,10 +191,10 @@ The approach is particularly relevant to:
 
 The project will develop through practical experiments rather than assuming the complete architecture upfront.
 
-- [ ] Define the engineering knowledge taxonomy and source-record format.
+- [x] Define the initial engineering knowledge taxonomy and source-record format.
 - [ ] Establish a curated library of architecture, programming, and open-source implementation references.
-- [ ] Define reusable engineering skills and project instructions.
-- [ ] Create templates for requirements, architecture, component specifications, and acceptance criteria.
+- [x] Define initial project-wide and directory-level engineering instructions.
+- [x] Define the initial specification standard.
 - [ ] Demonstrate knowledge-grounded specification generation with Claude.
 - [ ] Implement a representative system incrementally using Claude Code.
 - [ ] Generate implementation documentation from the actual repository.
