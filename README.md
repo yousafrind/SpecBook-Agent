@@ -19,6 +19,63 @@ The goal is to connect these environments through a controlled engineering lifec
 
 ---
 
+
+## How the method works
+
+SpecBook-Agent is an engineering method built around **NotebookLM, Claude, and Claude Code**. The repository preserves the durable artifacts and evidence; these tools perform the research, reasoning, and implementation work. The initial workflow is human-orchestrated: handoffs between tools are deliberate, reviewable steps, not an assumed automated integration.
+
+```mermaid
+flowchart TD
+    A["Engineering sources<br/>official docs, open-source projects, patterns"] --> B["NotebookLM<br/>source-grounded research and synthesis"]
+    B --> C["Claude<br/>reasoning, knowledge discovery, architecture"]
+    R["Problem, requirements and constraints"] --> C
+    C --> D["Reviewable specifications<br/>requirements, architecture, interfaces, data, security, tests"]
+    D --> E["Human review and approval"]
+    E --> F["Claude Code<br/>repository-level implementation"]
+    F --> G["Git repository<br/>code, decisions and test evidence"]
+    G --> H["Claude<br/>implementation understanding and knowledge extraction"]
+    H --> I["Implementation knowledge<br/>what the system actually contains and does"]
+    I --> J["Feature work, debugging,<br/>change-impact analysis"]
+    J --> D
+    H --> K["Validated lessons and patterns"]
+    K --> C
+```
+
+**The roles are complementary:**
+
+- **NotebookLM** works over selected source material to support grounded research, synthesis, comparison, and discovery. It is a research environment, not the live repository or the canonical knowledge store.
+- **Claude** works with the research outputs and project artifacts to reason about requirements, discover and refine the knowledge structure, develop architecture, produce specifications, and understand implementation evidence.
+- **Claude Code** works directly in the repository to implement approved specifications, run checks, and help derive implementation knowledge from the codebase.
+- **Git and the repository** preserve versioned specifications, decisions, code, tests, and evidence. The actual source code and executable results take precedence over generated summaries.
+
+The initial process does not assume a direct NotebookLM–Claude integration. People carry reviewed findings and artifacts between the tools. Automation can be introduced later where it demonstrably improves the workflow.
+
+### The knowledge structure is discovered, not imposed
+
+The project will not begin by declaring a complete, rigid taxonomy or pretending that we already know every useful engineering category. We start with a small set of practical concepts and let source research and engineering experiments challenge and extend them.
+
+Claude can propose concepts, categories, relationships, duplicates, gaps, and confidence assessments. Proposed changes remain reviewable; accepted knowledge structures are versioned in the repository. This keeps the knowledge model adaptable without making it arbitrary or silently self-modifying.
+
+### First engineering experiment: an Enterprise Data Retrieval Agent
+
+The first reference domain will be an **Enterprise Data Retrieval Agent**: a system that lets an authorized user ask questions about enterprise resources in natural language and receive answers grounded in retrieved data and evidence.
+
+The agent may eventually work across resources such as relational databases, ERP systems, internal APIs, and enterprise documents. The first implementation should be deliberately bounded and read-only.
+
+A representative interaction is:
+
+1. A user asks a business question in natural language.
+2. The agent interprets the intent and asks for clarification when the request is ambiguous.
+3. It identifies relevant enterprise resources and proposes a retrieval plan.
+4. It retrieves only data the user is authorized to access, using governed interfaces and constrained operations.
+5. It returns an answer with source evidence, assumptions, and limitations.
+6. Tests and observed implementation behaviour are captured as implementation knowledge and used to improve subsequent specifications.
+
+This is a useful first experiment because it forces us to engineer real concerns: enterprise schemas and terminology, semantic interpretation, authorization, data minimization, query safety, provenance, traceability, error handling, and verification. It is not merely a demonstration of text-to-SQL.
+
+The experiment will use NotebookLM and Claude to research the relevant engineering patterns, discover the knowledge structure, and produce specifications; Claude Code will implement the agent in the repository. The exact technology stack and scope will be selected through that specification process rather than assumed in advance.
+
+
 ## Project documentation
 
 The engineering foundation is documented in the following files:
@@ -191,12 +248,12 @@ The approach is particularly relevant to:
 
 The project will develop through practical experiments rather than assuming the complete architecture upfront.
 
-- [x] Define the initial engineering knowledge taxonomy and source-record format.
+- [ ] Establish a minimal, provisional knowledge vocabulary and source-record format; discover and evolve taxonomy through source research and engineering experiments.
 - [ ] Establish a curated library of architecture, programming, and open-source implementation references.
 - [x] Define initial project-wide and directory-level engineering instructions.
 - [x] Define the initial specification standard.
-- [ ] Demonstrate knowledge-grounded specification generation with Claude.
-- [ ] Implement a representative system incrementally using Claude Code.
+- [ ] Demonstrate the NotebookLM–Claude research-to-specification workflow using the Enterprise Data Retrieval Agent.
+- [ ] Implement the first read-only Enterprise Data Retrieval Agent incrementally using Claude Code.
 - [ ] Generate implementation documentation from the actual repository.
 - [ ] Build the second knowledge environment for codebase understanding.
 - [ ] Demonstrate feature development, debugging, and change-impact analysis.
